@@ -1,6 +1,9 @@
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+
+
+
 class Interface extends JFrame implements ActionListener {
     // create a frame
     static JFrame janela;
@@ -9,16 +12,15 @@ class Interface extends JFrame implements ActionListener {
     static JTextField visorDeCalculos;
 
     // store operator and operands
-    String s0, s1, s2;
+    String texto1, texto2, texto3;
 
     // default constructor
-    Interface()
-    {
-        s0 = s1 = s2 = "";
+    Interface() {
+        texto1 = texto2 = texto3 = "";
     }
 
     // main function
-    public static void main(String args[])
+    public static void criarCalculadora()
     {
         // create a frame
         janela = new JFrame("Calculadora Java");
@@ -33,10 +35,10 @@ class Interface extends JFrame implements ActionListener {
         }
 
         // create an object of class
-        Interface c = new Interface();
+        Interface aparencia = new Interface();
 
         // create a textfield
-        visorDeCalculos = new JTextField(16);
+        visorDeCalculos = new JTextField(35);
 
         // set the textfield to non-editable
         visorDeCalculos.setEditable(false);
@@ -76,127 +78,137 @@ class Interface extends JFrame implements ActionListener {
         //painel.setBounds(200, 250, 100, 150);
 
         // add action listeners
-        botaoMultiplicacao.addActionListener(c);
-        botaoDivisao.addActionListener(c);
-        botaoSubtracao.addActionListener(c);
-        botaoAdicao.addActionListener(c);
-        botao9.addActionListener(c);
-        botao8.addActionListener(c);
-        botao7.addActionListener(c);
-        botao6.addActionListener(c);
-        botao5.addActionListener(c);
-        botao4.addActionListener(c);
-        botao3.addActionListener(c);
-        botao2.addActionListener(c);
-        botao1.addActionListener(c);
-        botao0.addActionListener(c);
-        botaoIgual.addActionListener(c);
-        botaoLimpar.addActionListener(c);
-        botaoPonto.addActionListener(c);
+        botaoMultiplicacao.addActionListener(aparencia);
+        botaoDivisao.addActionListener(aparencia);
+        botaoSubtracao.addActionListener(aparencia);
+        botaoAdicao.addActionListener(aparencia);
+        botao9.addActionListener(aparencia);
+        botao8.addActionListener(aparencia);
+        botao7.addActionListener(aparencia);
+        botao6.addActionListener(aparencia);
+        botao5.addActionListener(aparencia);
+        botao4.addActionListener(aparencia);
+        botao3.addActionListener(aparencia);
+        botao2.addActionListener(aparencia);
+        botao1.addActionListener(aparencia);
+        botao0.addActionListener(aparencia);
+        botaoIgual.addActionListener(aparencia);
+        botaoLimpar.addActionListener(aparencia);
+        botaoPonto.addActionListener(aparencia);
 
         // add elements to panel
-        painel.add(l);
-        painel.add(ba);
-        painel.add(b1);
-        painel.add(b2);
-        painel.add(b3);
-        painel.add(bs);
-        painel.add(b4);
-        painel.add(b5);
-        p.add(b6);
-        p.add(bm);
-        p.add(b7);
-        p.add(b8);
-        p.add(b9);
-        p.add(bd);
-        p.add(be);
-        p.add(b0);
-        p.add(beq);
-        p.add(beq1);
+        painel.add(visorDeCalculos);
+        painel.add(botaoAdicao);
+        painel.add(botao1);
+        painel.add(botao2);
+        painel.add(botao3);
+        painel.add(botaoSubtracao);
+        painel.add(botao4);
+        painel.add(botao5);
+        painel.add(botao6);
+        painel.add(botaoMultiplicacao);
+        painel.add(botao7);
+        painel.add(botao8);
+        painel.add(botao9);
+        painel.add(botaoDivisao);
+        painel.add(botaoIgual);
+        painel.add(botao0);
+        painel.add(botaoLimpar);
+        painel.add(botaoPonto);
 
         // set Background of panel
-        p.setBackground(Color.gray);
+        painel.setBackground(Color.gray);
 
         // add panel to frame
-        f.add(p);
+        janela.add(painel);
 
-        f.setBounds(0, 0, 350, 350);
+        janela.setBounds(0, 0, 350, 200);
 
-        f.setVisible(true);
+        janela.setVisible(true);
 
-        f.setDefaultCloseOperation( WindowConstants.
-                DISPOSE_ON_CLOSE);
+        janela.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE);
     }
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent evento)
     {
-        String s = e.getActionCommand();
+        String texto = evento.getActionCommand();
 
         // if the value is a number
-        if ((s.charAt(0) >= '0' && s.charAt(0) <= '9') || s.charAt(0) == '.') {
+        if ((texto.charAt(0) >= '0' && texto.charAt(0) <= '9') || texto.charAt(0) == '.') {
             // if operand is present then add to second no
-            if (!s1.equals(""))
-                s2 = s2 + s;
-            else
-                s0 = s0 + s;
-
+            if (!texto2.equals("")){
+                texto3 = texto3 + texto;
+            }else{
+                texto1 = texto1 + texto;
+            }
             // set the value of text
-            l.setText(s0 + s1 + s2);
+            visorDeCalculos.setText(texto1 + texto2 + texto3);
         }
-        else if (s.charAt(0) == 'C') {
+        else if (texto.charAt(0) == 'C') {
             // clear the one letter
-            s0 = s1 = s2 = "";
+            texto1 = texto2 = texto3 = Operacoes.limpar();
 
             // set the value of text
-            l.setText(s0 + s1 + s2);
+            visorDeCalculos.setText(texto1 + texto2 + texto3);
         }
-        else if (s.charAt(0) == '=') {
+        else if (texto.charAt(0) == '=') {
 
-            double te;
+            //double te;
+            double resultado;
 
             // store the value in 1st
-            if (s1.equals("+"))
-                te = (Double.parseDouble(s0) + Double.parseDouble(s2));
-            else if (s1.equals("-"))
-                te = (Double.parseDouble(s0) - Double.parseDouble(s2));
-            else if (s1.equals("/"))
-                te = (Double.parseDouble(s0) / Double.parseDouble(s2));
-            else
-                te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+            if (texto2.equals("+")) {
+                resultado = Operacoes.adicao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                //(Double.parseDouble(texto1) + Double.parseDouble(texto3));
+            }else if (texto2.equals("-")) {
+                resultado = Operacoes.subtracao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                //(Double.parseDouble(texto1) - Double.parseDouble(texto2));
+            }else if (texto2.equals("/")) {
+                resultado = Operacoes.divisao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                //(Double.parseDouble(texto1) / Double.parseDouble(texto2));
+            }else {
+                resultado = Operacoes.multiplicacao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                //(Double.parseDouble(texto1) * Double.parseDouble(texto2));
+            }
 
             // set the value of text
-            l.setText(s0 + s1 + s2 + "=" + te);
+            visorDeCalculos.setText(Double.toString(resultado));
 
             // convert it to string
-            s0 = Double.toString(te);
+            texto1 = Double.toString(resultado);
 
-            s1 = s2 = "";
+            texto2 = texto3 = "";
         }
         else {
             // if there was no operand
-            if (s1.equals("") || s2.equals(""))
-                s1 = s;
+            if (texto2.equals("") || texto3.equals(""))
+                texto2 = texto;
                 // else evaluate
             else {
-                double te;
+                double resultado;
 
                 // store the value in 1st
-                if (s1.equals("+"))
-                    te = (Double.parseDouble(s0) + Double.parseDouble(s2));
-                else if (s1.equals("-"))
-                    te = (Double.parseDouble(s0) - Double.parseDouble(s2));
-                else if (s1.equals("/"))
-                    te = (Double.parseDouble(s0) / Double.parseDouble(s2));
-                else
-                    te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+                if (texto2.equals("+")) {
+                    resultado = Operacoes.adicao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                    //(Double.parseDouble(texto1) + Double.parseDouble(texto3));
+                }else if (texto2.equals("-")) {
+                    resultado = Operacoes.subtracao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                    //(Double.parseDouble(texto1) - Double.parseDouble(texto3));
+                }else if (texto2.equals("/")) {
+                    resultado = Operacoes.divisao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                    //(Double.parseDouble(texto1) / Double.parseDouble(texto3));
+                }else {
+                    resultado = Operacoes.adicao(Double.parseDouble(texto1), Double.parseDouble(texto3));
+                    //(Double.parseDouble(texto1) * Double.parseDouble(texto3));
+                }
 
                 // convert it to string
-                s0 = Double.toString(te);
+                texto1 = Double.toString(resultado);
 
                 // place the operator
-                s1 = s;
+                texto2 = texto;
 
                 // make the operand blank
-                s2 = "";
+                texto3 = "";
 
 
 
@@ -205,7 +217,7 @@ class Interface extends JFrame implements ActionListener {
             }
 
             // set the value of text
-            l.setText(s0 + s1 + s2);
+            visorDeCalculos.setText(texto1 + texto2 + texto3);
         }
     }
 }

@@ -124,6 +124,8 @@ class Interface extends JFrame implements ActionListener {
 
         janela.setBounds(0, 0, 350, 200);
 
+        janela.setResizable(false);
+
         janela.setVisible(true);
 
         janela.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE);

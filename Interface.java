@@ -122,7 +122,7 @@ class Interface extends JFrame implements ActionListener {
         // add panel to frame
         janela.add(painel);
 
-        janela.setBounds(0, 0, 350, 200);
+        janela.setBounds(200, 200, 350, 200);
 
         janela.setResizable(false);
 
